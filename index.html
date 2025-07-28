@@ -229,11 +229,11 @@
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
-            transition: all 0.3s ease;
+            /* transition: all 0.3s ease; */
         }
 
         .contact-item:hover {
-            transform: translateX(10px);
+            /* transform: translateX(10px); */
         }
 
         .contact-item i {
@@ -257,7 +257,7 @@
             color: white;
             font-size: 1.5rem;
             margin: 0 10px;
-            transition: all 0.3s ease;
+            /* transition: all 0.3s ease; */
         }
 
         .social-links a:hover {
@@ -293,6 +293,84 @@
             }
         }
 
+        /* Detail Toggle Styles */
+        .detail-toggle-container {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1050;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .detail-toggle-container:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .detail-toggle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: var(--primary-color);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(26px);
+        }
+
+        .toggle-label {
+            font-weight: 500;
+            color: var(--dark-color);
+            font-size: 0.9rem;
+        }
+
+        /* Content visibility classes */
+        .detailed-content {
+            transition: all 0.5s ease;
+        }
+
+        .detailed-content.hidden {
+            display: none !important;
+        }
+
+        .summary-content {
+            display: none;
+            transition: all 0.5s ease;
+        }
+
+        .summary-content.visible {
+            display: block;
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -313,6 +391,16 @@
     </style>
 </head>
 <body>
+    <!-- Detail Toggle -->
+    <div class="detail-toggle-container">
+        <div class="detail-toggle">
+            <span class="toggle-label">Full Details</span>
+            <div class="toggle-switch active" id="detailToggle">
+                <div class="toggle-slider"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(0,0,0,0.1); backdrop-filter: blur(10px);">
         <div class="container">
@@ -492,13 +580,13 @@
     <!-- Experience Section -->
     <section id="experience" class="section">
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Experience</h2>
+            <h2 class="section-title" data-aos="fade-up"><i class="bi bi-gear-fill me-2" style="color: #6c757d;"></i>Experience</h2>
             <div class="row g-4">
                 <!-- TCS Systems Engineer -->
                 <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
                     <div class="skill-card">
                         <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-building text-primary me-3" style="font-size: 2rem;"></i>
+                            <i class="bi bi-briefcase-fill text-primary me-3" style="font-size: 2rem;"></i>
                             <div>
                                 <h4 class="mb-1">Systems Engineer</h4>
                                 <p class="text-muted mb-0">Tata Consultancy Services · Full-time</p>
@@ -600,7 +688,7 @@
                 <!-- Machine Learning & AI -->
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="skill-card text-center">
-                        <i class="bi bi-brain skill-icon"></i>
+                        <i class="bi bi-cpu skill-icon"></i>
                         <h4>Machine Learning & AI</h4>
                         <div class="mt-3">
                             <span class="badge bg-danger me-1 mb-1">Deep Learning</span>
@@ -719,7 +807,7 @@
     </section>
 
     <!-- Certifications & Achievements Section -->
-    <section id="certifications" class="section">
+    <section id="certifications" class="section detailed-content">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Certifications & Achievements</h2>
             <div class="row g-4">
@@ -745,7 +833,7 @@
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="skill-card">
                         <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-brain text-success me-3" style="font-size: 2rem;"></i>
+                            <i class="bi bi-lightning-charge-fill text-success me-3" style="font-size: 2rem;"></i>
                             <div>
                                 <h4 class="mb-1">Deep Learning Workshop</h4>
                                 <p class="text-muted mb-0">Indian Institute of Technology, Madras</p>
@@ -828,7 +916,7 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="section">
+    <section id="projects" class="section detailed-content">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Featured Projects</h2>
             <div class="row g-4">
@@ -969,7 +1057,7 @@
     </section>
 
     <!-- Personal Interests Section -->
-    <section id="interests" class="section" style="background: #f8f9fa;">
+    <section id="interests" class="section detailed-content" style="background: #f8f9fa;">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Personal Interests & Aspirations</h2>
             <div class="row g-4">
@@ -1205,6 +1293,43 @@
         // Start typing effect after page load
         window.addEventListener('load', function() {
             setTimeout(typeWriter, 1000);
+        });
+
+        // Detail toggle functionality
+        const detailToggle = document.getElementById('detailToggle');
+        const toggleLabel = document.querySelector('.toggle-label');
+        
+        // Initialize toggle state (default: full details ON)
+        let showFullDetails = true;
+        
+        detailToggle.addEventListener('click', function() {
+            showFullDetails = !showFullDetails;
+            
+            // Toggle switch appearance
+            detailToggle.classList.toggle('active');
+            
+            // Update label text
+            toggleLabel.textContent = showFullDetails ? 'Full Details' : 'Summary View';
+            
+            // Toggle content visibility
+            const detailedContent = document.querySelectorAll('.detailed-content');
+            const summaryContent = document.querySelectorAll('.summary-content');
+            
+            detailedContent.forEach(element => {
+                if (showFullDetails) {
+                    element.classList.remove('hidden');
+                } else {
+                    element.classList.add('hidden');
+                }
+            });
+            
+            summaryContent.forEach(element => {
+                if (showFullDetails) {
+                    element.classList.remove('visible');
+                } else {
+                    element.classList.add('visible');
+                }
+            });
         });
     </script>
 </body>
