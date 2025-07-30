@@ -1412,19 +1412,13 @@
         const detailToggle = document.getElementById('detailToggle');
         const toggleLabel = document.querySelector('.toggle-label');
         
-        // Initialize toggle state (default: full details ON)
-        let showFullDetails = true;
+        // Function to determine if device is mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
         
-        detailToggle.addEventListener('click', function() {
-            showFullDetails = !showFullDetails;
-            
-            // Toggle switch appearance
-            detailToggle.classList.toggle('active');
-            
-            // Update label text
-            toggleLabel.textContent = showFullDetails ? 'Full Details' : 'Summary View';
-            
-            // Toggle content visibility
+        // Function to toggle content visibility
+        function toggleContentVisibility(showFullDetails) {
             const detailedContent = document.querySelectorAll('.detailed-content');
             const summaryContent = document.querySelectorAll('.summary-content');
             
@@ -1443,6 +1437,35 @@
                     element.classList.add('visible');
                 }
             });
+            
+            // Update toggle switch appearance and label
+            if (showFullDetails) {
+                detailToggle.classList.add('active');
+                toggleLabel.textContent = 'Full Details';
+            } else {
+                detailToggle.classList.remove('active');
+                toggleLabel.textContent = 'Summary View';
+            }
+        }
+        
+        // Initialize based on device type: summary for mobile, detailed for desktop
+        let showFullDetails = !isMobile(); // Desktop = true (detailed), Mobile = false (summary)
+        
+        // Set initial state
+        toggleContentVisibility(showFullDetails);
+        
+        // Handle window resize to update view if screen size changes
+        window.addEventListener('resize', function() {
+            const newMobileState = isMobile();
+            // Only auto-adjust if switching between mobile/desktop breakpoints
+            showFullDetails = !newMobileState;
+            toggleContentVisibility(showFullDetails);
+        });
+        
+        // Handle manual toggle click
+        detailToggle.addEventListener('click', function() {
+            showFullDetails = !showFullDetails;
+            toggleContentVisibility(showFullDetails);
         });
     </script>
 </body>
