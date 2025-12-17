@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santhosh Ramakrishnan -  My Portfolio</title>
+    <title>Santhosh Ramakrishnan - AI Engineer & GenAI Specialist</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,11 +19,15 @@
             --primary-color: #667eea;
             --secondary-color: #764ba2;
             --accent-color: #f093fb;
-            --dark-color: #2c3e50;
+            --quantum-cyan: #00f2fe;
+            --quantum-purple: #8b5cf6;
+            --quantum-pink: #ec4899;
+            --dark-color: #0a0a1a;
             --light-color: #ecf0f1;
             --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-quantum: linear-gradient(135deg, #667eea 0%, #ec4899 50%, #00f2fe 100%);
         }
 
         * {
@@ -307,64 +311,92 @@
             }
         }
 
-        /* Detail Toggle Styles */
+        /* Detail Toggle Styles - Modern Pill Design */
         .detail-toggle-container {
             position: fixed;
-            top: 80px;
+            bottom: 20px;
             right: 20px;
             z-index: 1050;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 20px;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.9) 0%, rgba(26, 26, 46, 0.95) 100%);
+            backdrop-filter: blur(15px);
+            padding: 8px;
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .detail-toggle-container:hover {
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+            border-color: rgba(102, 126, 234, 0.5);
         }
 
         .detail-toggle {
             display: flex;
             align-items: center;
-            gap: 12px;
-        }
-
-        .toggle-switch {
+            gap: 0;
             position: relative;
-            width: 50px;
-            height: 24px;
-            background: #ccc;
-            border-radius: 12px;
+        }
+
+        .toggle-option {
+            padding: 10px 16px;
             cursor: pointer;
-            transition: background 0.3s;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            z-index: 2;
         }
 
-        .toggle-switch.active {
-            background: var(--primary-color);
+        .toggle-option i {
+            font-size: 0.9rem;
         }
 
-        .toggle-slider {
+        .toggle-option.active {
+            color: white;
+        }
+
+        .toggle-option:hover:not(.active) {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Sliding background indicator */
+        .toggle-indicator {
             position: absolute;
+            height: calc(100% - 4px);
+            background: var(--gradient-1);
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             top: 2px;
-            left: 2px;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            transition: transform 0.3s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .toggle-switch.active .toggle-slider {
-            transform: translateX(26px);
+        .toggle-indicator.summary {
+            left: 2px;
+            width: calc(50% - 2px);
+        }
+
+        .toggle-indicator.detailed {
+            left: calc(50%);
+            width: calc(50% - 2px);
+        }
+
+        /* Legacy toggle support - hidden */
+        .toggle-switch {
+            display: none;
         }
 
         .toggle-label {
-            font-weight: 500;
-            color: var(--dark-color);
-            font-size: 0.9rem;
+            display: none;
         }
 
         /* Content visibility classes */
@@ -402,15 +434,2217 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--gradient-2);
         }
+
+        /* ============================================
+           QUANTUM COMPUTING VISUAL EFFECTS
+        ============================================ */
+
+        /* Quantum Wave Background */
+        .quantum-wave {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .quantum-wave::before,
+        .quantum-wave::after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 242, 254, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
+            animation: quantumWave 20s ease-in-out infinite;
+        }
+
+        .quantum-wave::after {
+            animation-delay: -10s;
+            animation-direction: reverse;
+        }
+
+        @keyframes quantumWave {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(1.1); }
+        }
+
+        /* Quantum Circuit Lines */
+        .quantum-circuit {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circuit-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--quantum-cyan), transparent);
+            opacity: 0.3;
+            animation: circuitPulse 4s ease-in-out infinite;
+        }
+
+        .circuit-line:nth-child(1) { top: 20%; width: 100%; animation-delay: 0s; }
+        .circuit-line:nth-child(2) { top: 40%; width: 80%; left: 10%; animation-delay: 0.5s; }
+        .circuit-line:nth-child(3) { top: 60%; width: 90%; left: 5%; animation-delay: 1s; }
+        .circuit-line:nth-child(4) { top: 80%; width: 70%; left: 15%; animation-delay: 1.5s; }
+
+        @keyframes circuitPulse {
+            0%, 100% { opacity: 0.1; transform: scaleX(0.8); }
+            50% { opacity: 0.4; transform: scaleX(1); }
+        }
+
+        /* Quantum Qubit Orbs */
+        .qubit-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .qubit {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--quantum-cyan) 0%, transparent 70%);
+            animation: qubitFloat 8s ease-in-out infinite;
+            box-shadow: 0 0 30px var(--quantum-cyan), 0 0 60px rgba(0, 242, 254, 0.3);
+        }
+
+        .qubit::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: qubitRing 3s linear infinite;
+        }
+
+        .qubit:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+        .qubit:nth-child(2) { top: 25%; right: 15%; animation-delay: 1s; background: radial-gradient(circle, var(--quantum-purple) 0%, transparent 70%); box-shadow: 0 0 30px var(--quantum-purple); }
+        .qubit:nth-child(3) { top: 60%; left: 8%; animation-delay: 2s; }
+        .qubit:nth-child(4) { top: 70%; right: 10%; animation-delay: 3s; background: radial-gradient(circle, var(--quantum-pink) 0%, transparent 70%); box-shadow: 0 0 30px var(--quantum-pink); }
+        .qubit:nth-child(5) { top: 85%; left: 20%; animation-delay: 4s; background: radial-gradient(circle, var(--quantum-purple) 0%, transparent 70%); }
+
+        @keyframes qubitFloat {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-30px) scale(1.2); opacity: 1; }
+        }
+
+        @keyframes qubitRing {
+            0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2) rotate(180deg); opacity: 0; }
+        }
+
+        /* Superposition Effect */
+        .superposition {
+            position: relative;
+        }
+
+        .superposition::before,
+        .superposition::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+        }
+
+        .superposition::before {
+            color: var(--quantum-cyan);
+            animation: superpositionShift 3s ease-in-out infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+        }
+
+        .superposition::after {
+            color: var(--quantum-pink);
+            animation: superpositionShift 3s ease-in-out infinite reverse;
+            clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+        }
+
+        @keyframes superpositionShift {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(3px); }
+            75% { transform: translateX(-3px); }
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            animation: glitchText 5s infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            color: var(--quantum-cyan);
+            animation: glitchBefore 3s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+            transform: translateX(-2px);
+        }
+
+        .glitch::after {
+            color: var(--quantum-pink);
+            animation: glitchAfter 2s infinite;
+            clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+            transform: translateX(2px);
+        }
+
+        @keyframes glitchBefore {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-3px); }
+            40% { transform: translateX(3px); }
+            60% { transform: translateX(-1px); }
+            80% { transform: translateX(2px); }
+        }
+
+        @keyframes glitchAfter {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(3px); }
+            40% { transform: translateX(-3px); }
+            60% { transform: translateX(2px); }
+            80% { transform: translateX(-2px); }
+        }
+
+        @keyframes glitchText {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.8; }
+            94% { opacity: 1; }
+            95% { opacity: 0.9; }
+            96% { opacity: 1; }
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.05;
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: var(--quantum-cyan);
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            animation: matrixFall 10s linear infinite;
+            text-shadow: 0 0 10px var(--quantum-cyan);
+        }
+
+        @keyframes matrixFall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(200vh); }
+        }
+
+        /* 3D Perspective Cards */
+        .card-3d {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .card-3d-inner {
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .card-3d:hover .card-3d-inner {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+
+        /* Holographic Effect */
+        .holographic {
+            position: relative;
+            background: linear-gradient(135deg, 
+                rgba(102, 126, 234, 0.1) 0%, 
+                rgba(236, 72, 153, 0.1) 25%, 
+                rgba(0, 242, 254, 0.1) 50%, 
+                rgba(102, 126, 234, 0.1) 75%, 
+                rgba(236, 72, 153, 0.1) 100%);
+            background-size: 400% 400%;
+            animation: holographicShift 8s ease infinite;
+        }
+
+        .holographic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 40%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                transparent 60%);
+            background-size: 200% 200%;
+            animation: holographicShine 3s ease infinite;
+        }
+
+        @keyframes holographicShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes holographicShine {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Quantum Entanglement Lines */
+        .entanglement-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--quantum-cyan), 
+                var(--quantum-purple), 
+                var(--quantum-pink), 
+                transparent);
+            animation: entanglementPulse 3s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes entanglementPulse {
+            0%, 100% { transform: scaleX(0); opacity: 0; }
+            50% { transform: scaleX(1); opacity: 0.7; }
+        }
+
+        /* Morphing Blob */
+        .quantum-blob {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(102, 126, 234, 0.15) 0%, 
+                rgba(236, 72, 153, 0.1) 50%, 
+                transparent 70%);
+            filter: blur(60px);
+            animation: blobMorph 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .quantum-blob:nth-child(1) { top: -10%; left: -10%; }
+        .quantum-blob:nth-child(2) { bottom: -10%; right: -10%; animation-delay: -7.5s; }
+
+        @keyframes blobMorph {
+            0%, 100% { 
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+                transform: rotate(90deg) scale(1.1);
+            }
+            50% { 
+                border-radius: 50% 60% 30% 60% / 30% 40% 70% 60%;
+                transform: rotate(180deg) scale(1);
+            }
+            75% {
+                border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
+                transform: rotate(270deg) scale(1.1);
+            }
+        }
+
+        /* Scan Line Effect */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 0, 0, 0.02) 50%
+            );
+            background-size: 100% 4px;
+            animation: scanLineMove 10s linear infinite;
+        }
+
+        @keyframes scanLineMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        /* Pulse Ring Animation */
+        .pulse-ring {
+            position: relative;
+        }
+
+        .pulse-ring::before,
+        .pulse-ring::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--quantum-cyan);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: pulseRingExpand 2s ease-out infinite;
+        }
+
+        .pulse-ring::after {
+            animation-delay: 1s;
+        }
+
+        @keyframes pulseRingExpand {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        }
+
+        /* Text Reveal Animation */
+        .text-reveal {
+            overflow: hidden;
+        }
+
+        .text-reveal span {
+            display: inline-block;
+            animation: textRevealUp 0.8s ease forwards;
+            animation-delay: calc(var(--i) * 0.1s);
+            transform: translateY(100%);
+        }
+
+        @keyframes textRevealUp {
+            to { transform: translateY(0); }
+        }
+
+        /* Stagger Animation for Lists */
+        .stagger-animation > * {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: staggerIn 0.6s ease forwards;
+        }
+
+        .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+        .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+        .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+        .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+        .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+        .stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes staggerIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Quantum State Indicator */
+        .quantum-state {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            border-radius: 50px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+        }
+
+        .quantum-state::before {
+            content: '|ψ⟩';
+            color: var(--quantum-cyan);
+            font-weight: bold;
+        }
+
+        /* Neon Text */
+        .neon-text {
+            text-shadow: 
+                0 0 5px var(--quantum-cyan),
+                0 0 10px var(--quantum-cyan),
+                0 0 20px var(--quantum-cyan),
+                0 0 40px var(--quantum-purple);
+            animation: neonFlicker 3s infinite;
+        }
+
+        @keyframes neonFlicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 
+                    0 0 5px var(--quantum-cyan),
+                    0 0 10px var(--quantum-cyan),
+                    0 0 20px var(--quantum-cyan),
+                    0 0 40px var(--quantum-purple);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+
+        /* ============================================
+           GLASSMORPHISM THEME
+        ============================================ */
+
+        /* Theme Toggle Button - Top Right Corner */
+        .theme-toggle {
+            position: fixed;
+            top: 80px;
+            right: 70px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: row;
+            gap: 0.3rem;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 0.75rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.15);
+            border-color: var(--quantum-cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+        }
+
+        .theme-btn.active {
+            background: var(--gradient-1);
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+        }
+
+        .theme-label {
+            display: none;
+        }
+
+        /* ============================================
+           GLASSMORPHISM THEME STYLES - Elegant & Clean
+        ============================================ */
+        body.glass-theme {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e8e8e8;
+        }
+
+        body.glass-theme .quantum-wave,
+        body.glass-theme .quantum-circuit,
+        body.glass-theme .qubit-container,
+        body.glass-theme .matrix-bg,
+        body.glass-theme .scan-line,
+        body.glass-theme .quantum-blob {
+            display: none !important;
+        }
+
+        body.glass-theme .section-title {
+            color: #ffffff !important;
+        }
+
+        body.glass-theme .hero-title {
+            color: #ffffff !important;
+            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        body.glass-theme .hero-subtitle {
+            color: rgba(255, 255, 255, 0.85) !important;
+        }
+
+        body.glass-theme .status-badge {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.5);
+            color: #6ee7b7;
+        }
+
+        body.glass-theme .quantum-state {
+            background: rgba(165, 180, 252, 0.2);
+            border-color: rgba(165, 180, 252, 0.5);
+            color: #a5b4fc;
+        }
+
+        body.glass-theme .skill-icon {
+            color: #a5b4fc !important;
+        }
+
+        body.glass-theme h4, body.glass-theme h5 {
+            color: #ffffff !important;
+        }
+
+        /* Glass - Fix light background sections */
+        body.glass-theme .section[style*="background: #f8f9fa"],
+        body.glass-theme #skills,
+        body.glass-theme #education {
+            background: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        body.glass-theme .skill-card {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        }
+
+        body.glass-theme .skill-card p,
+        body.glass-theme .skill-card .lead {
+            color: rgba(255, 255, 255, 0.85) !important;
+        }
+
+        body.glass-theme .text-muted {
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+
+        body.glass-theme .text-primary {
+            color: #a5b4fc !important;
+        }
+
+        body.glass-theme .text-success {
+            color: #6ee7b7 !important;
+        }
+
+        body.glass-theme .badge.bg-primary,
+        body.glass-theme .badge.bg-success,
+        body.glass-theme .badge.bg-info,
+        body.glass-theme .badge.bg-warning,
+        body.glass-theme .badge.bg-danger,
+        body.glass-theme .badge.bg-secondary,
+        body.glass-theme .badge.bg-dark,
+        body.glass-theme .badge.bg-light {
+            background: rgba(165, 180, 252, 0.2) !important;
+            color: #e0e7ff !important;
+            border: 1px solid rgba(165, 180, 252, 0.3);
+        }
+
+        body.glass-theme .project-card {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        }
+
+        body.glass-theme .project-card h4 {
+            color: #ffffff !important;
+        }
+
+        body.glass-theme .project-card p {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        body.glass-theme .contact-item {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
+        body.glass-theme .contact-item h5 {
+            color: #ffffff !important;
+        }
+
+        body.glass-theme .contact-item p {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        body.glass-theme .lead {
+            color: rgba(255, 255, 255, 0.85) !important;
+        }
+
+        /* Glass Background Orbs */
+        .glass-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            display: none;
+        }
+
+        body.glass-theme .glass-orbs {
+            display: block;
+        }
+
+        .glass-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .glass-orb:nth-child(1) {
+            width: 600px;
+            height: 600px;
+            background: rgba(102, 126, 234, 0.4);
+            top: -20%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .glass-orb:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            background: rgba(236, 72, 153, 0.3);
+            top: 50%;
+            right: -15%;
+            animation-delay: -5s;
+        }
+
+        .glass-orb:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 242, 254, 0.3);
+            bottom: -10%;
+            left: 30%;
+            animation-delay: -10s;
+        }
+
+        .glass-orb:nth-child(4) {
+            width: 300px;
+            height: 300px;
+            background: rgba(118, 75, 162, 0.4);
+            top: 30%;
+            left: 50%;
+            animation-delay: -15s;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 30px) scale(1.05); }
+        }
+
+        /* Glass Cards */
+        body.glass-theme .skill-card,
+        body.glass-theme .project-card,
+        body.glass-theme .experience-card {
+            background: rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        body.glass-theme .skill-card:hover,
+        body.glass-theme .project-card:hover {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(255, 255, 255, 0.25) !important;
+            box-shadow: 
+                0 15px 45px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                0 0 30px rgba(102, 126, 234, 0.2);
+            transform: translateY(-8px);
+        }
+
+        /* Glass Hero Section */
+        body.glass-theme .hero-section {
+            background: transparent !important;
+        }
+
+        body.glass-theme .hero-section::before {
+            display: none;
+        }
+
+        /* Glass Profile Image */
+        body.glass-theme .profile-img {
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        body.glass-theme .profile-img:hover {
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Glass Navbar */
+        body.glass-theme .navbar {
+            background: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Glass Badges */
+        body.glass-theme .badge {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white !important;
+        }
+
+        body.glass-theme .badge:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Glass Buttons */
+        body.glass-theme .btn-custom {
+            background: rgba(102, 126, 234, 0.3) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+        }
+
+        body.glass-theme .btn-custom:hover {
+            background: rgba(102, 126, 234, 0.5) !important;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        body.glass-theme .btn-outline-light {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        body.glass-theme .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Glass Sections */
+        body.glass-theme .section {
+            background: transparent !important;
+        }
+
+        body.glass-theme #skills {
+            background: rgba(255, 255, 255, 0.02) !important;
+        }
+
+        /* Glass Contact Section */
+        body.glass-theme .contact-section {
+            background: rgba(102, 126, 234, 0.1) !important;
+            backdrop-filter: blur(20px);
+        }
+
+        body.glass-theme .contact-item {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1rem;
+        }
+
+        /* Glass Social Links */
+        body.glass-theme .social-links a {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        body.glass-theme .social-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Glass Footer */
+        body.glass-theme .footer {
+            background: rgba(10, 10, 26, 0.8) !important;
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Glass Gaming Panels */
+        body.glass-theme .panel-item,
+        body.glass-theme .panel-link {
+            background: rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            color: white;
+        }
+
+        body.glass-theme .panel-item:hover,
+        body.glass-theme .panel-link:hover {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border-color: rgba(255, 255, 255, 0.25) !important;
+        }
+
+        body.glass-theme .panel-value {
+            background: linear-gradient(135deg, #fff, #e0e0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.glass-theme .panel-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Glass Status Badge */
+        body.glass-theme .status-badge {
+            background: rgba(16, 185, 129, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        body.glass-theme .quantum-state {
+            background: rgba(102, 126, 234, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        /* Glass Project Images */
+        body.glass-theme .project-img {
+            background: linear-gradient(135deg, 
+                rgba(102, 126, 234, 0.4), 
+                rgba(118, 75, 162, 0.4)) !important;
+        }
+
+        /* Glass Text Colors */
+        body.glass-theme .text-muted {
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+
+        body.glass-theme h1, 
+        body.glass-theme h2, 
+        body.glass-theme h3, 
+        body.glass-theme h4, 
+        body.glass-theme h5, 
+        body.glass-theme h6,
+        body.glass-theme p,
+        body.glass-theme span,
+        body.glass-theme li {
+            color: white;
+        }
+
+        /* Glass removes some quantum effects */
+        body.glass-theme .neon-text {
+            text-shadow: none;
+            animation: none;
+        }
+
+        body.glass-theme .glitch::before,
+        body.glass-theme .glitch::after {
+            display: none;
+        }
+
+        body.glass-theme .holographic::before {
+            display: none;
+        }
+
+        /* Glass Frosted Overlay Cards */
+        .glass-card-frost {
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.glass-theme .glass-card-frost::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.1) 100%
+            );
+            pointer-events: none;
+        }
+
+        /* Glass Highlight Line */
+        body.glass-theme .skill-card::after,
+        body.glass-theme .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent);
+        }
+
+        /* ============================================
+           AI THEME - Neural Network Aesthetic
+           Colors: Emerald Green + Electric Blue
+        ============================================ */
+        body.ai-theme {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #21262d 100%);
+            color: #c9d1d9;
+        }
+
+        body.ai-theme .quantum-wave,
+        body.ai-theme .quantum-circuit,
+        body.ai-theme .qubit-container,
+        body.ai-theme .matrix-bg,
+        body.ai-theme .scan-line,
+        body.ai-theme .quantum-blob,
+        body.ai-theme .glass-orbs {
+            display: none !important;
+        }
+
+        body.ai-theme p,
+        body.ai-theme span,
+        body.ai-theme li,
+        body.ai-theme .lead {
+            color: #c9d1d9 !important;
+        }
+
+        body.ai-theme .text-muted {
+            color: #8b949e !important;
+        }
+
+        body.ai-theme .hero-subtitle {
+            color: #8b949e !important;
+        }
+
+        /* AI Neural Network Background */
+        .ai-network {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            display: none;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+        }
+
+        body.ai-theme .ai-network {
+            display: block;
+        }
+
+        .neural-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+            animation: neuralPulse 3s ease-in-out infinite;
+        }
+
+        .neural-node:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+        .neural-node:nth-child(2) { top: 30%; left: 25%; animation-delay: 0.5s; }
+        .neural-node:nth-child(3) { top: 20%; left: 40%; animation-delay: 1s; }
+        .neural-node:nth-child(4) { top: 45%; left: 15%; animation-delay: 1.5s; }
+        .neural-node:nth-child(5) { top: 60%; left: 30%; animation-delay: 2s; }
+        .neural-node:nth-child(6) { top: 75%; left: 20%; animation-delay: 2.5s; }
+        .neural-node:nth-child(7) { top: 25%; right: 20%; animation-delay: 0.3s; background: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+        .neural-node:nth-child(8) { top: 50%; right: 15%; animation-delay: 0.8s; background: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+        .neural-node:nth-child(9) { top: 70%; right: 25%; animation-delay: 1.3s; background: #8b5cf6; box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+        .neural-node:nth-child(10) { top: 85%; right: 10%; animation-delay: 1.8s; background: #8b5cf6; box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+
+        @keyframes neuralPulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.5); opacity: 1; }
+        }
+
+        body.ai-theme .skill-card,
+        body.ai-theme .project-card {
+            background: rgba(16, 185, 129, 0.05) !important;
+            border: 1px solid rgba(16, 185, 129, 0.2) !important;
+        }
+
+        body.ai-theme .skill-card:hover,
+        body.ai-theme .project-card:hover {
+            border-color: rgba(16, 185, 129, 0.5) !important;
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.2);
+        }
+
+        body.ai-theme .hero-section {
+            background: transparent !important;
+        }
+
+        body.ai-theme .section-title,
+        body.ai-theme h2, body.ai-theme h3, body.ai-theme h4, body.ai-theme h5 {
+            color: #10b981 !important;
+        }
+
+        body.ai-theme .hero-title {
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.ai-theme .neon-text {
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5), 0 0 20px rgba(16, 185, 129, 0.3);
+            animation: none;
+        }
+
+        body.ai-theme .status-badge {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.4);
+            color: #6ee7b7;
+        }
+
+        body.ai-theme .quantum-state {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.4);
+            color: #93c5fd;
+        }
+
+        body.ai-theme .btn-custom {
+            background: linear-gradient(135deg, #10b981, #3b82f6) !important;
+        }
+
+        body.ai-theme .panel-item,
+        body.ai-theme .panel-link {
+            background: rgba(16, 185, 129, 0.15) !important;
+            border-color: rgba(16, 185, 129, 0.4) !important;
+            color: #10b981;
+        }
+
+        body.ai-theme .panel-label {
+            color: #10b981 !important;
+        }
+
+        body.ai-theme .badge {
+            background: rgba(16, 185, 129, 0.2) !important;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #6ee7b7 !important;
+        }
+
+        body.ai-theme .contact-section {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%) !important;
+        }
+
+        body.ai-theme .footer {
+            background: #0d1117 !important;
+        }
+
+        body.ai-theme .skill-icon {
+            color: #10b981 !important;
+        }
+
+        /* AI - Fix light background sections */
+        body.ai-theme .section[style*="background: #f8f9fa"],
+        body.ai-theme #skills,
+        body.ai-theme #education {
+            background: rgba(16, 185, 129, 0.03) !important;
+        }
+
+        body.ai-theme .skill-card {
+            background: rgba(16, 185, 129, 0.05) !important;
+            border: 1px solid rgba(16, 185, 129, 0.15) !important;
+        }
+
+        body.ai-theme .skill-card p,
+        body.ai-theme .skill-card .lead {
+            color: #c9d1d9 !important;
+        }
+
+        body.ai-theme .skill-card h3,
+        body.ai-theme .skill-card h4,
+        body.ai-theme .skill-card h5 {
+            color: #10b981 !important;
+        }
+
+        body.ai-theme .text-primary {
+            color: #3b82f6 !important;
+        }
+
+        body.ai-theme .text-success {
+            color: #10b981 !important;
+        }
+
+        body.ai-theme .badge.bg-primary,
+        body.ai-theme .badge.bg-success,
+        body.ai-theme .badge.bg-info,
+        body.ai-theme .badge.bg-warning,
+        body.ai-theme .badge.bg-danger,
+        body.ai-theme .badge.bg-secondary,
+        body.ai-theme .badge.bg-dark,
+        body.ai-theme .badge.bg-light {
+            background: rgba(16, 185, 129, 0.2) !important;
+            color: #6ee7b7 !important;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        body.ai-theme .project-card {
+            background: rgba(16, 185, 129, 0.05) !important;
+        }
+
+        body.ai-theme .project-card h4 {
+            color: #10b981 !important;
+        }
+
+        body.ai-theme .project-card p {
+            color: #c9d1d9 !important;
+        }
+
+        body.ai-theme .contact-item {
+            background: rgba(16, 185, 129, 0.08) !important;
+            border: 1px solid rgba(16, 185, 129, 0.2) !important;
+        }
+
+        body.ai-theme .contact-item h5 {
+            color: #10b981 !important;
+        }
+
+        body.ai-theme .contact-item p {
+            color: #c9d1d9 !important;
+        }
+
+        body.ai-theme .lead {
+            color: #c9d1d9 !important;
+        }
+
+        /* ============================================
+           MATH THEME - Geometric & Golden Ratio
+           Colors: Golden Amber + Deep Purple
+        ============================================ */
+        body.math-theme {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #1e3a5f 100%);
+            color: #e8e8e8;
+        }
+
+        body.math-theme .quantum-wave,
+        body.math-theme .quantum-circuit,
+        body.math-theme .qubit-container,
+        body.math-theme .matrix-bg,
+        body.math-theme .scan-line,
+        body.math-theme .quantum-blob,
+        body.math-theme .glass-orbs,
+        body.math-theme .ai-network {
+            display: none !important;
+        }
+
+        body.math-theme p,
+        body.math-theme span,
+        body.math-theme li,
+        body.math-theme .lead {
+            color: #e0e0e0 !important;
+        }
+
+        body.math-theme .text-muted {
+            color: #b8b8b8 !important;
+        }
+
+        body.math-theme .hero-subtitle {
+            color: #d4af37 !important;
+        }
+
+        body.math-theme .hero-title {
+            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 50%, #ff8c00 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Math Grid Background */
+        .math-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            display: none;
+            background-image: 
+                linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        body.math-theme .math-grid {
+            display: block;
+        }
+
+        /* Floating Math Symbols */
+        .math-symbols {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            display: none;
+            font-family: 'Times New Roman', serif;
+            font-size: 24px;
+            color: rgba(255, 215, 0, 0.15);
+        }
+
+        body.math-theme .math-symbols {
+            display: block;
+        }
+
+        .math-symbol {
+            position: absolute;
+            animation: mathFloat 15s ease-in-out infinite;
+        }
+
+        .math-symbol:nth-child(1) { top: 10%; left: 5%; content: '∫'; animation-delay: 0s; }
+        .math-symbol:nth-child(2) { top: 25%; left: 15%; animation-delay: 1s; }
+        .math-symbol:nth-child(3) { top: 40%; left: 8%; animation-delay: 2s; }
+        .math-symbol:nth-child(4) { top: 60%; left: 12%; animation-delay: 3s; }
+        .math-symbol:nth-child(5) { top: 80%; left: 6%; animation-delay: 4s; }
+        .math-symbol:nth-child(6) { top: 15%; right: 10%; animation-delay: 0.5s; }
+        .math-symbol:nth-child(7) { top: 35%; right: 5%; animation-delay: 1.5s; }
+        .math-symbol:nth-child(8) { top: 55%; right: 15%; animation-delay: 2.5s; }
+        .math-symbol:nth-child(9) { top: 75%; right: 8%; animation-delay: 3.5s; }
+        .math-symbol:nth-child(10) { top: 90%; right: 12%; animation-delay: 4.5s; }
+
+        @keyframes mathFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.15; }
+            50% { transform: translateY(-20px) rotate(10deg); opacity: 0.3; }
+        }
+
+        body.math-theme .skill-card,
+        body.math-theme .project-card {
+            background: rgba(255, 215, 0, 0.03) !important;
+            border: 1px solid rgba(255, 215, 0, 0.15) !important;
+        }
+
+        body.math-theme .skill-card:hover,
+        body.math-theme .project-card:hover {
+            border-color: rgba(255, 215, 0, 0.4) !important;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        body.math-theme .hero-section {
+            background: transparent !important;
+        }
+
+        body.math-theme .section-title,
+        body.math-theme h1, body.math-theme h2, body.math-theme h3, body.math-theme h4 {
+            color: #ffd700 !important;
+        }
+
+        body.math-theme .neon-text {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
+            animation: none;
+        }
+
+        body.math-theme .btn-custom {
+            background: linear-gradient(135deg, #ffd700, #ff8c00) !important;
+            color: #1a1a2e !important;
+        }
+
+        body.math-theme .panel-item,
+        body.math-theme .panel-link {
+            background: rgba(255, 215, 0, 0.1) !important;
+            border-color: rgba(255, 215, 0, 0.3) !important;
+        }
+
+        body.math-theme .badge {
+            background: rgba(255, 215, 0, 0.2) !important;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            color: #ffd700 !important;
+        }
+
+        body.math-theme .contact-section {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08) 0%, rgba(118, 75, 162, 0.1) 100%) !important;
+        }
+
+        body.math-theme .footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%) !important;
+        }
+
+        body.math-theme .skill-icon {
+            color: #ffd700 !important;
+        }
+
+        body.math-theme .status-badge {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: rgba(255, 215, 0, 0.4);
+            color: #ffd700;
+        }
+
+        body.math-theme .quantum-state {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.3);
+            color: #ffd700;
+        }
+
+        /* Math - Fix light background sections */
+        body.math-theme .section[style*="background: #f8f9fa"],
+        body.math-theme #skills,
+        body.math-theme #education {
+            background: rgba(255, 215, 0, 0.03) !important;
+        }
+
+        body.math-theme .skill-card {
+            background: rgba(255, 215, 0, 0.05) !important;
+            border: 1px solid rgba(255, 215, 0, 0.15) !important;
+        }
+
+        body.math-theme .skill-card p,
+        body.math-theme .skill-card .lead {
+            color: #e0e0e0 !important;
+        }
+
+        body.math-theme .skill-card h3,
+        body.math-theme .skill-card h4,
+        body.math-theme .skill-card h5 {
+            color: #ffd700 !important;
+        }
+
+        body.math-theme .text-primary {
+            color: #ffd700 !important;
+        }
+
+        body.math-theme .text-success {
+            color: #4ade80 !important;
+        }
+
+        body.math-theme .text-muted {
+            color: #b8b8b8 !important;
+        }
+
+        body.math-theme .project-card {
+            background: rgba(255, 215, 0, 0.05) !important;
+        }
+
+        body.math-theme .project-card h4 {
+            color: #ffd700 !important;
+        }
+
+        body.math-theme .project-card p {
+            color: #e0e0e0 !important;
+        }
+
+        body.math-theme .contact-item {
+            background: rgba(255, 215, 0, 0.08) !important;
+            border: 1px solid rgba(255, 215, 0, 0.2) !important;
+        }
+
+        body.math-theme .contact-item h5 {
+            color: #ffd700 !important;
+        }
+
+        body.math-theme .contact-item p {
+            color: #e0e0e0 !important;
+        }
+
+        body.math-theme .lead {
+            color: #e0e0e0 !important;
+        }
+
+        /* ============================================
+           PHYSICS THEME - Cosmic & Particle
+           Colors: Coral Red + Cosmic Blue + Starfield
+        ============================================ */
+        body.physics-theme {
+            background: linear-gradient(135deg, #000814 0%, #001d3d 50%, #003566 100%);
+            color: #e8e8e8;
+        }
+
+        body.physics-theme .quantum-wave,
+        body.physics-theme .quantum-circuit,
+        body.physics-theme .qubit-container,
+        body.physics-theme .matrix-bg,
+        body.physics-theme .scan-line,
+        body.physics-theme .quantum-blob,
+        body.physics-theme .glass-orbs,
+        body.physics-theme .ai-network,
+        body.physics-theme .math-grid,
+        body.physics-theme .math-symbols {
+            display: none !important;
+        }
+
+        body.physics-theme p,
+        body.physics-theme span,
+        body.physics-theme li,
+        body.physics-theme .lead {
+            color: #d4d4d4 !important;
+        }
+
+        body.physics-theme .text-muted {
+            color: #9ca3af !important;
+        }
+
+        body.physics-theme .hero-subtitle {
+            color: #93c5fd !important;
+        }
+
+        body.physics-theme .hero-title {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #ff9ff3 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Physics Stars Background */
+        .physics-cosmos {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            display: none;
+            background: 
+                radial-gradient(2px 2px at 20% 30%, white, transparent),
+                radial-gradient(2px 2px at 40% 70%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 60% 20%, white, transparent),
+                radial-gradient(2px 2px at 80% 50%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 10% 80%, white, transparent),
+                radial-gradient(1px 1px at 30% 50%, rgba(255,255,255,0.7), transparent),
+                radial-gradient(2px 2px at 70% 90%, white, transparent),
+                radial-gradient(1px 1px at 90% 10%, rgba(255,255,255,0.8), transparent);
+        }
+
+        body.physics-theme .physics-cosmos {
+            display: block;
+        }
+
+        /* Orbiting Particles */
+        .physics-particles {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: -1;
+            display: none;
+        }
+
+        body.physics-theme .physics-particles {
+            display: block;
+        }
+
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            border-radius: 50%;
+            animation: orbitRotate 20s linear infinite;
+        }
+
+        .orbit:nth-child(1) { width: 100%; height: 100%; animation-duration: 20s; }
+        .orbit:nth-child(2) { width: 70%; height: 70%; top: 15%; left: 15%; animation-duration: 15s; animation-direction: reverse; }
+        .orbit:nth-child(3) { width: 40%; height: 40%; top: 30%; left: 30%; animation-duration: 10s; }
+
+        .electron {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ff6b6b, 0 0 40px rgba(255, 107, 107, 0.5);
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes orbitRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        body.physics-theme .skill-card,
+        body.physics-theme .project-card {
+            background: rgba(255, 107, 107, 0.05) !important;
+            border: 1px solid rgba(255, 107, 107, 0.15) !important;
+        }
+
+        body.physics-theme .skill-card:hover,
+        body.physics-theme .project-card:hover {
+            border-color: rgba(255, 107, 107, 0.4) !important;
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.15);
+        }
+
+        body.physics-theme .hero-section {
+            background: transparent !important;
+        }
+
+        body.physics-theme .section-title,
+        body.physics-theme h1, body.physics-theme h2, body.physics-theme h3, body.physics-theme h4 {
+            color: #ff6b6b !important;
+        }
+
+        body.physics-theme .neon-text {
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5), 0 0 20px rgba(255, 107, 107, 0.3);
+            animation: none;
+        }
+
+        body.physics-theme .btn-custom {
+            background: linear-gradient(135deg, #ff6b6b, #feca57) !important;
+        }
+
+        body.physics-theme .panel-item,
+        body.physics-theme .panel-link {
+            background: rgba(255, 107, 107, 0.1) !important;
+            border-color: rgba(255, 107, 107, 0.3) !important;
+        }
+
+        body.physics-theme .badge {
+            background: rgba(255, 107, 107, 0.2) !important;
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            color: #fca5a5 !important;
+        }
+
+        body.physics-theme .contact-section {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.08) 0%, rgba(59, 130, 246, 0.1) 100%) !important;
+        }
+
+        body.physics-theme .footer {
+            background: #000814 !important;
+        }
+
+        body.physics-theme .skill-icon {
+            color: #ff6b6b !important;
+        }
+
+        body.physics-theme .status-badge {
+            background: rgba(255, 107, 107, 0.15);
+            border-color: rgba(255, 107, 107, 0.4);
+            color: #fca5a5;
+        }
+
+        body.physics-theme .quantum-state {
+            background: rgba(147, 197, 253, 0.15);
+            border-color: rgba(147, 197, 253, 0.4);
+            color: #93c5fd;
+        }
+
+        body.physics-theme .panel-label {
+            color: #ff6b6b !important;
+        }
+
+        /* Physics - Fix light background sections */
+        body.physics-theme .section[style*="background: #f8f9fa"],
+        body.physics-theme #skills,
+        body.physics-theme #education {
+            background: rgba(255, 107, 107, 0.03) !important;
+        }
+
+        body.physics-theme .skill-card {
+            background: rgba(255, 107, 107, 0.05) !important;
+            border: 1px solid rgba(255, 107, 107, 0.15) !important;
+        }
+
+        body.physics-theme .skill-card p,
+        body.physics-theme .skill-card .lead {
+            color: #d4d4d4 !important;
+        }
+
+        body.physics-theme .skill-card h3,
+        body.physics-theme .skill-card h4,
+        body.physics-theme .skill-card h5 {
+            color: #ff6b6b !important;
+        }
+
+        body.physics-theme .text-primary {
+            color: #93c5fd !important;
+        }
+
+        body.physics-theme .text-success {
+            color: #4ade80 !important;
+        }
+
+        body.physics-theme .text-muted {
+            color: #9ca3af !important;
+        }
+
+        body.physics-theme .project-card {
+            background: rgba(255, 107, 107, 0.05) !important;
+        }
+
+        body.physics-theme .project-card h4 {
+            color: #ff6b6b !important;
+        }
+
+        body.physics-theme .project-card p {
+            color: #d4d4d4 !important;
+        }
+
+        body.physics-theme .contact-item {
+            background: rgba(255, 107, 107, 0.08) !important;
+            border: 1px solid rgba(255, 107, 107, 0.2) !important;
+        }
+
+        body.physics-theme .contact-item h5 {
+            color: #ff6b6b !important;
+        }
+
+        body.physics-theme .contact-item p {
+            color: #d4d4d4 !important;
+        }
+
+        body.physics-theme .lead {
+            color: #d4d4d4 !important;
+        }
+
+        /* Responsive Theme Toggle */
+        @media (max-width: 991px) {
+            .theme-toggle {
+                top: auto;
+                bottom: 80px;
+                right: 15px;
+                flex-direction: row;
+                gap: 0.25rem;
+                padding: 0.4rem 0.5rem;
+            }
+
+            .theme-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .theme-toggle {
+                bottom: 70px;
+                right: 10px;
+            }
+
+            .theme-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* ============================================
+           ADVANCED GAMING ELEMENTS
+        ============================================ */
+        
+        /* Gaming Side Panel - Left */
+        .gaming-panel {
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .gaming-panel-right {
+            position: fixed;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .panel-item {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 10px;
+            padding: 0.4rem 0.6rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            min-width: 55px;
+        }
+
+        .panel-item:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .panel-label {
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            letter-spacing: 0.3px;
+        }
+
+        .panel-value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .panel-link {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 10px;
+            padding: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            width: 36px;
+            height: 36px;
+        }
+
+        .panel-link:hover {
+            background: var(--gradient-1);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .xp-bar {
+            width: 50px;
+            height: 5px;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 3px;
+            margin: 0.3rem auto 0;
+            overflow: hidden;
+        }
+
+        .xp-fill {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 3px;
+            animation: xpPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes xpPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Neon Glow Effects */
+        .neon-border {
+            position: relative;
+        }
+
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-1);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            filter: blur(10px);
+        }
+
+        .neon-border:hover::before {
+            opacity: 0.7;
+        }
+
+        /* Floating Animation */
+        .float-animation {
+            animation: floatUpDown 3s ease-in-out infinite;
+        }
+
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Gradient Text Animation */
+        .animated-gradient-text {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--secondary-color), var(--primary-color));
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientMove 4s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Card Shine Effect */
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine-effect::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: shine 6s linear infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+
+        /* Particles Animation */
+        .particles-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: particleRise 15s linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 6s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 7s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 8s; }
+
+        @keyframes particleRise {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #10b981;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        /* Enhanced Skill Cards */
+        .skill-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        /* Typing Cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: var(--primary-color);
+            margin-left: 3px;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Hide gaming panels on tablet and mobile */
+        @media (max-width: 1200px) {
+            .gaming-panel,
+            .gaming-panel-right {
+                display: none;
+            }
+        }
+
+        /* Adjust detail toggle on mobile */
+        @media (max-width: 991px) {
+            .detail-toggle-container {
+                bottom: 15px;
+                right: 15px;
+                padding: 6px;
+            }
+
+            .toggle-option {
+                padding: 8px 12px;
+                font-size: 0.7rem;
+            }
+
+            .toggle-option i {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .detail-toggle-container {
+                bottom: 10px;
+                left: 10px;
+                right: auto;
+                padding: 5px;
+            }
+
+            .toggle-option {
+                padding: 7px 10px;
+                font-size: 0.65rem;
+                gap: 4px;
+            }
+
+            .toggle-option span {
+                display: none;
+            }
+
+            .toggle-option i {
+                font-size: 1rem;
+            }
+
+            .theme-toggle {
+                bottom: 10px;
+                right: 10px;
+                left: auto;
+            }
+        }
+
+        /* Enhanced Badge Styles */
+        .badge {
+            font-weight: 500;
+            padding: 0.5em 0.8em;
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Project Card Hover Effects */
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .project-card:hover .project-img i {
+            transform: scale(1.2);
+            transition: transform 0.3s ease;
+        }
     </style>
 </head>
 <body>
-    <!-- Detail Toggle -->
+    <!-- Theme Toggle - Your Key Interests (Quantum, AI, Math, Physics, Glass) -->
+    <div class="theme-toggle" title="Switch Theme">
+        <button class="theme-btn active" id="quantumTheme" title="⚛️ Quantum Computing">⚛️</button>
+        <button class="theme-btn" id="aiTheme" title="🤖 Artificial Intelligence">🤖</button>
+        <button class="theme-btn" id="mathTheme" title="📐 Mathematics">📐</button>
+        <button class="theme-btn" id="physicsTheme" title="🔭 Physics">🔭</button>
+        <button class="theme-btn" id="glassTheme" title="💎 Glass">💎</button>
+    </div>
+
+    <!-- Glass Theme Background Orbs -->
+    <div class="glass-orbs">
+        <div class="glass-orb"></div>
+        <div class="glass-orb"></div>
+        <div class="glass-orb"></div>
+        <div class="glass-orb"></div>
+    </div>
+
+    <!-- AI Theme - Neural Network -->
+    <div class="ai-network">
+        <div class="neural-node"></div>
+        <div class="neural-node"></div>
+        <div class="neural-node"></div>
+        <div class="neural-node"></div>
+        <div class="neural-node"></div>
+        <div class="neural-node"></div>
+        <div class="neural-node"></div>
+        <div class="neural-node"></div>
+        <div class="neural-node"></div>
+        <div class="neural-node"></div>
+    </div>
+
+    <!-- Math Theme - Grid & Symbols -->
+    <div class="math-grid"></div>
+    <div class="math-symbols">
+        <span class="math-symbol">∫</span>
+        <span class="math-symbol">∑</span>
+        <span class="math-symbol">π</span>
+        <span class="math-symbol">∞</span>
+        <span class="math-symbol">√</span>
+        <span class="math-symbol">Δ</span>
+        <span class="math-symbol">∂</span>
+        <span class="math-symbol">∇</span>
+        <span class="math-symbol">φ</span>
+        <span class="math-symbol">θ</span>
+    </div>
+
+    <!-- Physics Theme - Cosmos & Particles -->
+    <div class="physics-cosmos"></div>
+    <div class="physics-particles">
+        <div class="orbit"><div class="electron"></div></div>
+        <div class="orbit"><div class="electron"></div></div>
+        <div class="orbit"><div class="electron"></div></div>
+    </div>
+
+    <!-- Quantum Visual Effects -->
+    <div class="quantum-wave"></div>
+    <div class="quantum-blob"></div>
+    <div class="quantum-blob"></div>
+    
+    <!-- Quantum Circuit Lines -->
+    <div class="quantum-circuit">
+        <div class="circuit-line"></div>
+        <div class="circuit-line"></div>
+        <div class="circuit-line"></div>
+        <div class="circuit-line"></div>
+    </div>
+
+    <!-- Qubit Orbs -->
+    <div class="qubit-container">
+        <div class="qubit"></div>
+        <div class="qubit"></div>
+        <div class="qubit"></div>
+        <div class="qubit"></div>
+        <div class="qubit"></div>
+    </div>
+
+    <!-- Matrix Background -->
+    <div class="matrix-bg">
+        <div class="matrix-column" style="left: 5%; animation-delay: 0s;">01001010</div>
+        <div class="matrix-column" style="left: 15%; animation-delay: 2s;">|ψ⟩=α|0⟩</div>
+        <div class="matrix-column" style="left: 25%; animation-delay: 4s;">10110101</div>
+        <div class="matrix-column" style="left: 35%; animation-delay: 1s;">HADAMARD</div>
+        <div class="matrix-column" style="left: 45%; animation-delay: 3s;">11010010</div>
+        <div class="matrix-column" style="left: 55%; animation-delay: 5s;">CNOT</div>
+        <div class="matrix-column" style="left: 65%; animation-delay: 2.5s;">|φ+⟩</div>
+        <div class="matrix-column" style="left: 75%; animation-delay: 1.5s;">QUANTUM</div>
+        <div class="matrix-column" style="left: 85%; animation-delay: 4.5s;">01110011</div>
+        <div class="matrix-column" style="left: 95%; animation-delay: 0.5s;">SUPERPOS</div>
+    </div>
+
+    <!-- Subtle Scan Line -->
+    <div class="scan-line"></div>
+
+    <!-- Theme-Aware Left Panel -->
+    <div class="gaming-panel">
+        <div class="panel-item holographic">
+            <div class="panel-label" id="leftPanelLabel1">⚛ Qubits</div>
+            <div class="panel-value" id="leftPanelValue1">42</div>
+        </div>
+        <div class="panel-item">
+            <div class="panel-label" id="leftPanelLabel2">Coherence</div>
+            <div class="xp-bar">
+                <div class="xp-fill" style="width: 73%;"></div>
+            </div>
+            <small id="leftPanelSmall" style="font-size: 0.6rem; color: #666;">|ψ⟩ 73%</small>
+        </div>
+        <a href="#skills" class="panel-link" title="Skills"><i class="bi bi-lightning-charge-fill"></i></a>
+        <a href="#projects" class="panel-link" title="Projects"><i class="bi bi-trophy-fill"></i></a>
+    </div>
+
+    <!-- Theme-Aware Right Panel -->
+    <div class="gaming-panel-right">
+        <div class="panel-item">
+            <div class="panel-label" id="rightPanelLabel1">State</div>
+            <div id="rightPanelValue1" style="font-size: 0.7rem;">⟨ψ|H|ψ⟩</div>
+        </div>
+        <div class="panel-item holographic">
+            <div class="panel-label" id="rightPanelLabel2">Entangled</div>
+            <div class="panel-value" id="rightPanelValue2" style="font-size: 0.9rem;">|φ+⟩</div>
+        </div>
+        <a href="https://github.com/CODERVIPERSAN" target="_blank" class="panel-link" title="GitHub"><i class="bi bi-github"></i></a>
+        <a href="https://linkedin.com/in/santhosh-ramakrishnan002" target="_blank" class="panel-link" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+    </div>
+
+    <!-- Detail Toggle - Modern Segmented Control -->
     <div class="detail-toggle-container">
         <div class="detail-toggle">
-            <span class="toggle-label">Full Details</span>
-            <div class="toggle-switch active" id="detailToggle">
-                <div class="toggle-slider"></div>
+            <div class="toggle-indicator detailed"></div>
+            <div class="toggle-option" id="summaryOption" data-mode="summary">
+                <i class="bi bi-list-ul"></i>
+                <span>Summary</span>
+            </div>
+            <div class="toggle-option active" id="detailedOption" data-mode="detailed">
+                <i class="bi bi-file-text"></i>
+                <span>Full</span>
             </div>
         </div>
     </div>
@@ -442,6 +2676,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" href="resume.html" target="_blank"><i class="bi bi-download me-1"></i>Resume</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -449,14 +2686,53 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
+        <!-- Particles Background -->
+        <div class="particles-bg">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
         <div class="container">
             <div class="hero-content" data-aos="fade-up">
-                <img src="my_image.jpg" alt="Santhosh Ramakrishnan" class="profile-img mb-4">
-                <h1 class="hero-title">Santhosh Ramakrishnan</h1>
-                <p class="hero-subtitle">Data Science Student @ IIT Madras | Systems Engineer @ TCS | Quantum ML | Deep Learning & Data Analysis | Software Development Enthusiast</p>
-                <a href="#contact" class="btn btn-custom btn-lg">
-                    <i class="bi bi-envelope me-2"></i>Get In Touch
-                </a>
+                <div class="float-animation mb-4 pulse-ring" style="display: inline-block;">
+                    <img src="my_image.jpg" alt="Santhosh Ramakrishnan" class="profile-img neon-border holographic">
+                </div>
+                <div class="d-flex gap-3 justify-content-center align-items-center mb-3 flex-wrap">
+                    <div class="status-badge">
+                        <span class="status-dot"></span>
+                        Available for Work
+                    </div>
+                    <div class="quantum-state" id="heroState">Quantum State: Active</div>
+                </div>
+                <h1 class="hero-title animated-gradient-text glitch" data-text="Santhosh Ramakrishnan">Santhosh Ramakrishnan</h1>
+                <p class="hero-subtitle">AI Engineer & GenAI Specialist @ TCS | Data Science @ IIT Madras | Neo4j GraphDB | Multi-Agent Systems | LLMs & RAG</p>
+                
+                <div class="d-flex gap-3 justify-content-center flex-wrap mb-4 stagger-animation">
+                    <span class="badge bg-light text-dark px-3 py-2"><i class="bi bi-cpu me-1"></i> AI Engineer</span>
+                    <span class="badge bg-light text-dark px-3 py-2"><i class="bi bi-diagram-3 me-1"></i> GenAI</span>
+                    <span class="badge px-3 py-2" style="background: linear-gradient(135deg, #667eea, #00f2fe); color: white;"><i class="bi bi-stars me-1"></i> Quantum ML</span>
+                    <span class="badge bg-light text-dark px-3 py-2"><i class="bi bi-mortarboard me-1"></i> IIT Madras</span>
+                    <span class="badge bg-light text-dark px-3 py-2"><i class="bi bi-building me-1"></i> TCS</span>
+                </div>
+                
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="#contact" class="btn btn-custom btn-lg shine-effect">
+                        <i class="bi bi-envelope me-2"></i>Get In Touch
+                    </a>
+                    <a href="resume.html" class="btn btn-outline-light btn-lg" target="_blank">
+                        <i class="bi bi-download me-2"></i>Download Resume
+                    </a>
+                    <a href="#projects" class="btn btn-outline-light btn-lg">
+                        <i class="bi bi-folder me-2"></i>View Projects
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -464,13 +2740,14 @@
     <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">About Me</h2>
+            <p class="text-center mb-2 theme-caption" id="aboutCaption" style="font-family: 'Courier New', monospace; font-size: 0.8rem;" data-aos="fade-up">// INITIALIZING QUANTUM STATE |ψ⟩</p>
+            <h2 class="section-title neon-text" data-aos="fade-up">About Me</h2>
             <div class="row align-items-center">
                 <div class="col-lg-8 mx-auto" data-aos="fade-up">
                     <div class="skill-card text-center">
                         <h3 class="h4 mb-4">Hello! I'm Santhosh Ramakrishnan</h3>
-                        <p class="lead mb-4">A passionate Data Science student at IIT Madras and Systems Engineer at TCS with expertise in machine learning, statistical analysis, and software development. I bridge the gap between data science and practical applications, creating innovative solutions that drive business value.</p>
-                        <p class="mb-4 detailed-content">Currently pursuing my Bachelor of Science in Data Science at IIT Madras while working full-time as a Systems Engineer at Tata Consultancy Services in Chennai. My unique combination of academic excellence and industry experience allows me to tackle complex problems with both theoretical depth and practical insight. I've also completed my BE in Computer Science from Anna University Chennai, giving me a strong foundation in software engineering principles.</p>
+                        <p class="lead mb-4">A passionate AI Engineer and GenAI Specialist at TCS with 1.3+ years of experience building cutting-edge AI solutions. Currently pursuing Data Science at IIT Madras, I specialize in Neo4j GraphDB, advanced prompting, multi-agent systems, and SDLC automation.</p>
+                        <p class="mb-4 detailed-content">With hands-on expertise in Generative AI and AI Engineering, I work on knowledge graph construction, data validation using GenAI systems, and developing intelligent multi-agent architectures. My unique blend of academic excellence at IIT Madras and industry experience at TCS enables me to bridge the gap between AI research and production systems.</p>
                         <p class="mb-4 detailed-content">As a mentor and educator, I've guided students in statistics at IIT Madras and currently teach mathematics, sharing my passion for analytical thinking and problem-solving. My diverse experience spans from deep learning and quantum ML to business analytics and educational technology.</p>
                         <div class="row g-3 mb-4">
                             <div class="col-md-6">
@@ -488,7 +2765,7 @@
                             <div class="col-md-6">
                                 <div class="contact-item justify-content-center">
                                     <i class="bi bi-building text-info"></i>
-                                    <span>Systems Engineer @ TCS</span>
+                                    <span>AI Engineer @ TCS</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -513,6 +2790,7 @@
     <!-- Education Section -->
     <section id="education" class="section" style="background: #f8f9fa;">
         <div class="container">
+            <p class="text-center mb-2 theme-caption" id="educationCaption" style="font-family: 'Courier New', monospace; font-size: 0.8rem;" data-aos="fade-up">// QUANTUM KNOWLEDGE ACCUMULATION</p>
             <h2 class="section-title" data-aos="fade-up">Education</h2>
             <div class="row g-4">
                 <!-- IIT Madras Data Science -->
@@ -594,25 +2872,59 @@
     <!-- Experience Section -->
     <section id="experience" class="section">
         <div class="container">
+            <p class="text-center mb-2 theme-caption" id="experienceCaption" style="font-family: 'Courier New', monospace; font-size: 0.8rem;" data-aos="fade-up">// APPLYING HADAMARD GATE TO CAREER TRAJECTORY</p>
             <h2 class="section-title" data-aos="fade-up"><i class="bi bi-gear-fill me-2" style="color: #6c757d;"></i>Experience</h2>
             <div class="row g-4">
-                <!-- TCS Systems Engineer -->
+                <!-- TCS AI Engineer -->
                 <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
                     <div class="skill-card">
                         <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-briefcase-fill text-primary me-3" style="font-size: 2rem;"></i>
+                            <i class="bi bi-cpu-fill text-primary me-3" style="font-size: 2rem;"></i>
                             <div>
-                                <h4 class="mb-1">Systems Engineer</h4>
+                                <h4 class="mb-1">AI Engineer & GenAI Specialist <span class="badge bg-success ms-2">Current</span></h4>
                                 <p class="text-muted mb-0">Tata Consultancy Services · Full-time</p>
                             </div>
                         </div>
-                        <h5 class="text-primary">Nov 2024 - Present · 9 mos</h5>
+                        <h5 class="text-primary">Nov 2023 - Present · 1.3+ years</h5>
                         <p class="text-muted mb-2">Chennai, Tamil Nadu, India · On-site</p>
-                        <p>Working as a Systems Engineer at TCS, contributing to various technology projects and gaining valuable industry experience in software development and system administration.</p>
+                        <p>Working as an AI Engineer specializing in Generative AI systems, building intelligent solutions that transform software development lifecycles and enterprise operations.</p>
+                        
+                        <div class="row g-3 my-3">
+                            <div class="col-md-6">
+                                <div class="p-3 rounded" style="background: rgba(102, 126, 234, 0.1); border-left: 3px solid var(--primary-color);">
+                                    <h6 class="mb-1"><i class="bi bi-diagram-3 text-info me-2"></i>Neo4j GraphDB</h6>
+                                    <small class="text-muted">Building knowledge graphs and graph-based AI solutions for complex data relationships</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 rounded" style="background: rgba(102, 126, 234, 0.1); border-left: 3px solid var(--secondary-color);">
+                                    <h6 class="mb-1"><i class="bi bi-chat-dots text-primary me-2"></i>Advanced Prompting</h6>
+                                    <small class="text-muted">Crafting sophisticated prompts for LLMs to achieve precise, reliable outputs</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 rounded" style="background: rgba(102, 126, 234, 0.1); border-left: 3px solid var(--accent-color);">
+                                    <h6 class="mb-1"><i class="bi bi-shield-check text-success me-2"></i>Data Validation</h6>
+                                    <small class="text-muted">Implementing GenAI-powered data validation systems for enterprise accuracy</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 rounded" style="background: rgba(102, 126, 234, 0.1); border-left: 3px solid #f5576c;">
+                                    <h6 class="mb-1"><i class="bi bi-people text-danger me-2"></i>Multi-Agent Systems</h6>
+                                    <small class="text-muted">Developing SDLC assistants using multi-agent architectures for automation</small>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div>
-                            <span class="badge bg-primary me-1 mb-1">Agile Methodologies</span>
-                            <span class="badge bg-success me-1 mb-1">Analytical Skills</span>
-                            <span class="badge bg-info me-1 mb-1">Systems Engineering</span>
+                            <span class="badge bg-primary me-1 mb-1">Generative AI</span>
+                            <span class="badge bg-success me-1 mb-1">Neo4j</span>
+                            <span class="badge bg-info me-1 mb-1">LangChain</span>
+                            <span class="badge bg-warning me-1 mb-1">Multi-Agent</span>
+                            <span class="badge bg-danger me-1 mb-1">Python</span>
+                            <span class="badge bg-secondary me-1 mb-1">LLMs</span>
+                            <span class="badge bg-dark me-1 mb-1">RAG</span>
+                            <span class="badge bg-primary me-1 mb-1">SDLC Automation</span>
                         </div>
                     </div>
                 </div>
@@ -663,11 +2975,28 @@
     <!-- Skills Section -->
     <section id="skills" class="section" style="background: #f8f9fa;">
         <div class="container">
+            <p class="text-center mb-2 theme-caption" id="skillsCaption" style="font-family: 'Courier New', monospace; font-size: 0.8rem;" data-aos="fade-up">// SUPERPOSITION OF CAPABILITIES |skills⟩ = Σ |skill_i⟩</p>
             <h2 class="section-title" data-aos="fade-up">Skills & Technologies</h2>
             <div class="row g-4">
+                <!-- Quantum Computing & Advanced AI - NEW FEATURED -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+                    <div class="skill-card text-center card-3d holographic" style="border: 2px solid var(--primary-color);">
+                        <i class="bi bi-stars skill-icon" style="color: var(--quantum-cyan);"></i>
+                        <h4 class="neon-text" style="font-size: 1.1rem;">Quantum Computing & AI</h4>
+                        <div class="mt-3">
+                            <span class="badge me-1 mb-1" style="background: linear-gradient(135deg, #667eea, #00f2fe);">Quantum ML</span>
+                            <span class="badge me-1 mb-1" style="background: linear-gradient(135deg, #764ba2, #ec4899);">Qiskit</span>
+                            <span class="badge bg-info me-1 mb-1">Quantum Algorithms</span>
+                            <span class="badge me-1 mb-1" style="background: linear-gradient(135deg, #667eea, #764ba2);">Superposition</span>
+                            <span class="badge bg-dark me-1 mb-1">Entanglement</span>
+                            <span class="badge bg-secondary me-1 mb-1">Quantum Gates</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Programming Languages & Development -->
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="skill-card text-center">
+                    <div class="skill-card text-center card-3d">
                         <i class="bi bi-code-slash skill-icon"></i>
                         <h4>Programming Languages</h4>
                         <div class="mt-3">
@@ -932,6 +3261,7 @@
     <!-- Projects Section -->
     <section id="projects" class="section ">
         <div class="container">
+            <p class="text-center mb-2 theme-caption" id="projectsCaption" style="font-family: 'Courier New', monospace; font-size: 0.8rem;" data-aos="fade-up">// QUANTUM ENTANGLEMENT OF IDEAS → OBSERVABLE RESULTS</p>
             <h2 class="section-title" data-aos="fade-up">Featured Projects</h2>
             <div class="row g-4">
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
@@ -1281,7 +3611,8 @@
     <!-- Contact Section -->
     <section id="contact" class="contact-section section">
         <div class="container">
-            <h2 class="section-title text-white" data-aos="fade-up">Get In Touch</h2>
+            <p class="text-center mb-2 theme-caption" id="contactCaption" style="font-family: 'Courier New', monospace; font-size: 0.8rem;" data-aos="fade-up">// ESTABLISHING QUANTUM CHANNEL FOR COMMUNICATION</p>
+            <h2 class="section-title text-white neon-text" data-aos="fade-up">Get In Touch</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
                     <div class="text-center mb-5">
@@ -1326,6 +3657,14 @@
                         </div>
                     </div>
                     
+                    <!-- Download Resume Button -->
+                    <div class="text-center my-4">
+                        <a href="resume.html" class="btn btn-custom btn-lg" target="_blank">
+                            <i class="bi bi-file-earmark-person me-2"></i>Download My Resume
+                        </a>
+                        <p class="text-white-50 mt-2"><small>Get a minimal summary for your records</small></p>
+                    </div>
+                    
                     <div class="social-links text-center">
                         <a href="https://github.com/CODERVIPERSAN" target="_blank" title="GitHub">
                             <i class="bi bi-github"></i>
@@ -1336,8 +3675,8 @@
                         <a href="https://linkedin.com/in/santhosh-ramakrishnan002" title="Contact via LinkedIn">
                             <i class="bi bi-envelope"></i>
                         </a>
-                        <a href="#" target="_blank" title="Twitter">
-                            <i class="bi bi-twitter"></i>
+                        <a href="resume.html" target="_blank" title="Download Resume">
+                            <i class="bi bi-download"></i>
                         </a>
                     </div>
                 </div>
@@ -1346,9 +3685,11 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" style="background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);">
         <div class="container">
-            <p>&copy; 2024 Santhosh Ramakrishnan. All rights reserved. Built with ❤️ and Bootstrap</p>
+            <p class="mb-1 theme-caption" id="footerCaption" style="font-family: 'Courier New', monospace; font-size: 0.7rem;">|portfolio⟩ = α|awesome⟩ + β|incredible⟩</p>
+            <p>&copy; 2025 Santhosh Ramakrishnan. All rights reserved. Built with ❤️ Bootstrap & Quantum CSS</p>
+            <p class="mb-0"><small class="neon-text">AI Engineer & GenAI Specialist | Quantum ML Enthusiast</small></p>
         </div>
     </footer>
 
@@ -1408,9 +3749,10 @@
             setTimeout(typeWriter, 1000);
         });
 
-        // Detail toggle functionality
-        const detailToggle = document.getElementById('detailToggle');
-        const toggleLabel = document.querySelector('.toggle-label');
+        // Detail toggle functionality - Modern Segmented Control
+        const summaryOption = document.getElementById('summaryOption');
+        const detailedOption = document.getElementById('detailedOption');
+        const toggleIndicator = document.querySelector('.toggle-indicator');
         
         // Function to determine if device is mobile
         function isMobile() {
@@ -1438,13 +3780,17 @@
                 }
             });
             
-            // Update toggle switch appearance and label
+            // Update toggle UI
             if (showFullDetails) {
-                detailToggle.classList.add('active');
-                toggleLabel.textContent = 'Full Details';
+                detailedOption.classList.add('active');
+                summaryOption.classList.remove('active');
+                toggleIndicator.classList.remove('summary');
+                toggleIndicator.classList.add('detailed');
             } else {
-                detailToggle.classList.remove('active');
-                toggleLabel.textContent = 'Summary View';
+                summaryOption.classList.add('active');
+                detailedOption.classList.remove('active');
+                toggleIndicator.classList.remove('detailed');
+                toggleIndicator.classList.add('summary');
             }
         }
         
@@ -1462,11 +3808,229 @@
             toggleContentVisibility(showFullDetails);
         });
         
-        // Handle manual toggle click
-        detailToggle.addEventListener('click', function() {
-            showFullDetails = !showFullDetails;
+        // Handle click on Summary option
+        summaryOption.addEventListener('click', function() {
+            showFullDetails = false;
             toggleContentVisibility(showFullDetails);
         });
+        
+        // Handle click on Detailed option
+        detailedOption.addEventListener('click', function() {
+            showFullDetails = true;
+            toggleContentVisibility(showFullDetails);
+        });
+
+        // ============================================
+        // THEME TOGGLE FUNCTIONALITY - 5 THEMES
+        // Representing Key Interests: Quantum, AI, Math, Physics, Glass
+        // ============================================
+        const themeButtons = {
+            quantum: document.getElementById('quantumTheme'),
+            ai: document.getElementById('aiTheme'),
+            math: document.getElementById('mathTheme'),
+            physics: document.getElementById('physicsTheme'),
+            glass: document.getElementById('glassTheme')
+        };
+        
+        const themeClasses = ['glass-theme', 'ai-theme', 'math-theme', 'physics-theme'];
+        
+        // Theme-specific captions for each section
+        const themeCaptions = {
+            quantum: {
+                about: '// INITIALIZING QUANTUM STATE |ψ⟩',
+                experience: '// APPLYING HADAMARD GATE TO CAREER TRAJECTORY',
+                skills: '// SUPERPOSITION OF CAPABILITIES |skills⟩ = Σ |skill_i⟩',
+                education: '// QUANTUM KNOWLEDGE ACCUMULATION |learn⟩',
+                projects: '// QUANTUM ENTANGLEMENT OF IDEAS → OBSERVABLE RESULTS',
+                contact: '// ESTABLISHING QUANTUM CHANNEL FOR COMMUNICATION',
+                footer: '|portfolio⟩ = α|awesome⟩ + β|incredible⟩',
+                heroState: 'Quantum State: |ψ⟩',
+                color: '#00f2fe',
+                // Side panels
+                leftLabel1: '⚛ Qubits',
+                leftValue1: '42',
+                leftLabel2: 'Coherence',
+                leftSmall: '|ψ⟩ 73%',
+                rightLabel1: 'State',
+                rightValue1: '⟨ψ|H|ψ⟩',
+                rightLabel2: 'Entangled',
+                rightValue2: '|φ+⟩'
+            },
+            ai: {
+                about: '// model.fit(knowledge, experience, epochs=∞)',
+                experience: '// neural_network.forward_propagation(career_path)',
+                skills: '// optimizer.maximize(skills, learning_rate=0.99)',
+                education: '// training_data.load(academic_knowledge)',
+                projects: '// output = model.predict(creative_input)',
+                contact: '// api.connect(collaboration_endpoint)',
+                footer: 'loss = 0.001 | accuracy = 99.9% | model: production_ready',
+                heroState: 'Model Status: Trained ✓',
+                color: '#10b981',
+                // Side panels
+                leftLabel1: '🧠 Neurons',
+                leftValue1: '1.2M',
+                leftLabel2: 'Accuracy',
+                leftSmall: '99.9%',
+                rightLabel1: 'Loss',
+                rightValue1: '0.001',
+                rightLabel2: 'Epochs',
+                rightValue2: '∞'
+            },
+            math: {
+                about: '// f(x) = ∫ knowledge · dx + C',
+                experience: '// ∇(career) = gradient_of_success',
+                skills: '// skills(x) = ax² + bx + c, where a > 0',
+                education: '// ∫∫ learning(x,y) dx dy = degree',
+                projects: '// Σ(projects) = Π(innovation × impact)',
+                contact: '// solve(collaboration) → optimal_solution',
+                footer: 'lim(x→∞) success(x) = ∞ | QED ∎',
+                heroState: 'Proof: Complete ∎',
+                color: '#ffd700',
+                // Side panels
+                leftLabel1: '∑ Series',
+                leftValue1: 'φ',
+                leftLabel2: 'Precision',
+                leftSmall: 'π digits',
+                rightLabel1: 'Theorem',
+                rightValue1: 'QED ∎',
+                rightLabel2: 'Solution',
+                rightValue2: '∃!'
+            },
+            physics: {
+                about: '// E = mc² | Converting potential to kinetic energy',
+                experience: '// F = ma | Force of experience × acceleration',
+                skills: '// ΔE = hν | Quantum of capabilities',
+                education: '// Knowledge = ∫ Learning · dt',
+                projects: '// Work = Force × Displacement | Innovation in motion',
+                contact: '// Signal transmission: sender → receiver',
+                footer: 'ΔS > 0 | Energy: Conserved | Momentum: Forward',
+                heroState: 'Energy State: Excited',
+                color: '#ff6b6b',
+                // Side panels
+                leftLabel1: '⚡ Energy',
+                leftValue1: 'E=mc²',
+                leftLabel2: 'Velocity',
+                leftSmall: '0.99c',
+                rightLabel1: 'Force',
+                rightValue1: 'F=ma',
+                rightLabel2: 'Entropy',
+                rightValue2: 'ΔS>0'
+            },
+            glass: {
+                about: '// Crafting digital excellence',
+                experience: '// Journey through innovation',
+                skills: '// A spectrum of expertise',
+                education: '// Foundation of knowledge',
+                projects: '// Where ideas become reality',
+                contact: '// Let\'s create something beautiful',
+                footer: '✦ Designed with passion and precision ✦',
+                heroState: 'Status: Creating',
+                color: '#a5b4fc',
+                // Side panels
+                leftLabel1: '✨ Level',
+                leftValue1: 'Pro',
+                leftLabel2: 'Progress',
+                leftSmall: '73%',
+                rightLabel1: 'Mode',
+                rightValue1: 'Creative',
+                rightLabel2: 'Focus',
+                rightValue2: '100%'
+            }
+        };
+        
+        // Function to update captions based on theme
+        function updateCaptions(themeName) {
+            const captions = themeCaptions[themeName];
+            
+            // Section captions
+            const captionElements = {
+                about: document.getElementById('aboutCaption'),
+                experience: document.getElementById('experienceCaption'),
+                skills: document.getElementById('skillsCaption'),
+                education: document.getElementById('educationCaption'),
+                projects: document.getElementById('projectsCaption'),
+                contact: document.getElementById('contactCaption'),
+                footer: document.getElementById('footerCaption'),
+                heroState: document.getElementById('heroState')
+            };
+            
+            Object.keys(captionElements).forEach(key => {
+                if (captionElements[key] && captions[key]) {
+                    captionElements[key].textContent = captions[key];
+                    captionElements[key].style.color = captions.color;
+                }
+            });
+            
+            // Side panel elements
+            const panelElements = {
+                leftLabel1: document.getElementById('leftPanelLabel1'),
+                leftValue1: document.getElementById('leftPanelValue1'),
+                leftLabel2: document.getElementById('leftPanelLabel2'),
+                leftSmall: document.getElementById('leftPanelSmall'),
+                rightLabel1: document.getElementById('rightPanelLabel1'),
+                rightValue1: document.getElementById('rightPanelValue1'),
+                rightLabel2: document.getElementById('rightPanelLabel2'),
+                rightValue2: document.getElementById('rightPanelValue2')
+            };
+            
+            // Update side panels
+            if (panelElements.leftLabel1) panelElements.leftLabel1.textContent = captions.leftLabel1;
+            if (panelElements.leftValue1) panelElements.leftValue1.textContent = captions.leftValue1;
+            if (panelElements.leftLabel2) panelElements.leftLabel2.textContent = captions.leftLabel2;
+            if (panelElements.leftSmall) panelElements.leftSmall.textContent = captions.leftSmall;
+            if (panelElements.rightLabel1) panelElements.rightLabel1.textContent = captions.rightLabel1;
+            if (panelElements.rightValue1) {
+                panelElements.rightValue1.textContent = captions.rightValue1;
+                panelElements.rightValue1.style.color = captions.color;
+            }
+            if (panelElements.rightLabel2) panelElements.rightLabel2.textContent = captions.rightLabel2;
+            if (panelElements.rightValue2) panelElements.rightValue2.textContent = captions.rightValue2;
+        }
+        
+        // Function to set active theme
+        function setTheme(themeName) {
+            // Remove all theme classes
+            themeClasses.forEach(cls => document.body.classList.remove(cls));
+            
+            // Remove active from all buttons
+            Object.values(themeButtons).forEach(btn => btn.classList.remove('active'));
+            
+            // Apply theme
+            if (themeName !== 'quantum') {
+                document.body.classList.add(themeName + '-theme');
+            }
+            
+            // Set active button
+            themeButtons[themeName].classList.add('active');
+            
+            // Update captions for the theme
+            updateCaptions(themeName);
+            
+            // Save preference
+            localStorage.setItem('portfolioTheme', themeName);
+            
+            // Add smooth transition
+            document.body.style.transition = 'all 0.5s ease';
+            setTimeout(() => {
+                document.body.style.transition = '';
+            }, 500);
+        }
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('portfolioTheme');
+        if (savedTheme && themeButtons[savedTheme]) {
+            setTheme(savedTheme);
+        } else {
+            // Set default captions
+            updateCaptions('quantum');
+        }
+        
+        // Add click handlers for all theme buttons
+        themeButtons.quantum.addEventListener('click', () => setTheme('quantum'));
+        themeButtons.ai.addEventListener('click', () => setTheme('ai'));
+        themeButtons.math.addEventListener('click', () => setTheme('math'));
+        themeButtons.physics.addEventListener('click', () => setTheme('physics'));
+        themeButtons.glass.addEventListener('click', () => setTheme('glass'));
     </script>
 </body>
 </html>

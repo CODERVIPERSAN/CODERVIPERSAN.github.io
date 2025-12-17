@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santhosh Ramakrishnan - Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+
+        .resume-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .resume-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .resume-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .resume-header .title {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .resume-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #667eea;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Summary */
+        .summary {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        /* Experience & Education Items */
+        .item {
+            margin-bottom: 1.5rem;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 0.3rem;
+        }
+
+        .item-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .item-date {
+            font-size: 0.85rem;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .item-subtitle {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-description {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .item-description ul {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .item-description li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .skill-category h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .skill-tag {
+            background: #f0f0ff;
+            color: #667eea;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Action Buttons */
+        .actions {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .resume-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .actions {
+                display: none;
+            }
+
+            .resume-header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .resume-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .item-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Header -->
+        <div class="resume-header">
+            <h1>Santhosh Ramakrishnan</h1>
+            <p class="title">AI Engineer & GenAI Specialist</p>
+            <div class="contact-info">
+                <a href="mailto:contact@linkedin">📧 Contact via LinkedIn</a>
+                <a href="https://linkedin.com/in/santhosh-ramakrishnan002" target="_blank">🔗 linkedin.com/in/santhosh-ramakrishnan002</a>
+                <a href="https://github.com/CODERVIPERSAN" target="_blank">💻 github.com/CODERVIPERSAN</a>
+                <span>📍 Chennai, India</span>
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="resume-body">
+            <!-- Summary -->
+            <div class="section">
+                <h2 class="section-title">Professional Summary</h2>
+                <p class="summary">
+                    AI Engineer and GenAI Specialist with 1.3+ years of experience at Tata Consultancy Services, specializing in building cutting-edge Generative AI solutions. Expertise in Neo4j GraphDB, advanced prompting techniques, data validation using GenAI systems, and multi-agent architectures for SDLC automation. Currently pursuing Data Science at IIT Madras with a strong foundation in Computer Science from Anna University.
+                </p>
+            </div>
+
+            <!-- Experience -->
+            <div class="section">
+                <h2 class="section-title">Experience</h2>
+                
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">AI Engineer & GenAI Specialist</span>
+                        <span class="item-date">Nov 2023 - Present</span>
+                    </div>
+                    <p class="item-subtitle">Tata Consultancy Services · Chennai, India</p>
+                    <div class="item-description">
+                        <ul>
+                            <li>Building knowledge graphs using Neo4j GraphDB for complex enterprise data relationships</li>
+                            <li>Developing multi-agent systems for SDLC automation using LangChain and LLMs</li>
+                            <li>Implementing GenAI-powered data validation systems for enterprise accuracy</li>
+                            <li>Crafting advanced prompting strategies for reliable LLM outputs</li>
+                            <li>Working with RAG architectures and vector databases for intelligent retrieval</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">Mathematics Educator</span>
+                        <span class="item-date">May 2025 - Present</span>
+                    </div>
+                    <p class="item-subtitle">Sai Ram Centre for Excellence · Part-time</p>
+                    <div class="item-description">
+                        <ul>
+                            <li>Teaching mathematics to students across multiple grade levels</li>
+                            <li>Developing educational content and fostering analytical thinking</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">Mentor in Statistics</span>
+                        <span class="item-date">Sep 2023 - Apr 2024</span>
+                    </div>
+                    <p class="item-subtitle">Indian Institute of Technology, Madras · Part-time</p>
+                    <div class="item-description">
+                        <ul>
+                            <li>Guided students in understanding statistical concepts and data analysis</li>
+                            <li>Mentored 18+ students with 100% positive feedback</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="section">
+                <h2 class="section-title">Education</h2>
+                
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">Bachelor of Science - Data Science</span>
+                        <span class="item-date">2021 - 2027</span>
+                    </div>
+                    <p class="item-subtitle">Indian Institute of Technology, Madras</p>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">Bachelor of Engineering - Computer Science</span>
+                        <span class="item-date">2020 - 2024</span>
+                    </div>
+                    <p class="item-subtitle">UCE BIT Campus Trichy (Anna University Chennai)</p>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="section">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>GenAI & AI</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">LangChain</span>
+                            <span class="skill-tag">LLMs</span>
+                            <span class="skill-tag">RAG</span>
+                            <span class="skill-tag">Multi-Agent</span>
+                            <span class="skill-tag">Prompt Engineering</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Databases</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Neo4j</span>
+                            <span class="skill-tag">GraphDB</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">Vector DBs</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Programming</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>ML & Data Science</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">Scikit-learn</span>
+                            <span class="skill-tag">Pandas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="section">
+                <h2 class="section-title">Certifications</h2>
+                <div class="item-description">
+                    <ul>
+                        <li><strong>Introduction to Quantum Computing</strong> - LinkedIn Learning (2025)</li>
+                        <li><strong>Deep Learning Workshop</strong> - IIT Madras (2025)</li>
+                        <li><strong>Machine Learning Workshop</strong> - IIT Madras (2024)</li>
+                        <li><strong>Foundation for Data Science</strong> - IIT Madras (2023)</li>
+                        <li><strong>Smart India Hackathon</strong> - Ministry of Education (2022)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="actions">
+        <button class="btn btn-primary" onclick="window.print()">📄 Download as PDF</button>
+        <a href="index.html" class="btn btn-secondary">← Back to Portfolio</a>
+    </div>
+
+    <script>
+        // Add print functionality hint
+        document.querySelector('.btn-primary').addEventListener('click', function() {
+            // The browser's print dialog will open
+            // User can save as PDF from there
+        });
+    </script>
+</body>
+</html>
