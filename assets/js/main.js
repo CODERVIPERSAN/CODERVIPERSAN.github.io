@@ -82,6 +82,11 @@
   const pvLogo = $("#pvLogo");
   const pvName = $("#pvName");
   const pvMeta = $("#pvMeta");
+  if (matchMedia("(hover: none) and (pointer: coarse)").matches) {
+    pvName.textContent = "Tap any element";
+    const intro = $("#elementCount")?.parentElement;
+    if (intro) intro.lastChild.textContent = intro.lastChild.textContent.replace("Hover a tile", "Tap a tile");
+  }
   const familyLabel = Object.fromEntries(D.families.map((f) => [f.id, f.label]));
   let lastShown = -1;
 

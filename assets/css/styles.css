@@ -282,6 +282,7 @@ button { font: inherit; color: inherit; }
   -webkit-mask-composite: source-in;
   mask-image: linear-gradient(to right, transparent, #000 8%, #000 41%, transparent 49%), linear-gradient(transparent, #000 8%);
   mask-composite: intersect;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
 }
 .hero-figure .hero-img { animation: breathe 6s ease-in-out infinite; transform-origin: 50% 100%; }
 @keyframes figureIn { from { opacity: 0; transform: translate(-50%, 40px); } to { opacity: 1; transform: translate(-50%, 0); } }
@@ -907,14 +908,44 @@ a.contact-card:hover i { transform: translate(3px, -3px); }
   .pill-nav::-webkit-scrollbar { display: none; }
   .pill-nav a { padding: 8px 12px; font-size: 12px; }
   .topbar.scrolled .brand-name { opacity: 1; transform: none; }
+  /* a pseudo-element, because backdrop-filter on .topbar itself would trap the fixed .pill-nav */
+  .topbar::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: rgba(244, 240, 228, 0.82);
+    border-bottom: 1px solid rgba(34, 36, 63, 0.06);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .topbar.scrolled::before { opacity: 1; }
 
-  .hero-figure { height: 70vh; transform: translateX(-50%); animation-name: figureInM; bottom: 22vh; }
-  @keyframes figureInM { from { opacity: 0; transform: translate(-50%, 40px); } to { opacity: 1; transform: translate(-50%, 0); } }
-  .hero-bgword { top: 16vh; }
-  .hero-copy { bottom: 120px; right: var(--pad); }
-  .hero-cta { left: var(--pad); right: auto; bottom: 56px; flex-direction: row; align-items: center; }
+  #others, .pill-nav a[data-section="others"] { display: none; }
+
+  .hero {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 72px var(--pad) 86px;
+  }
+  .hero-figure {
+    position: relative; left: auto; bottom: auto; flex: none; align-self: center;
+    height: clamp(230px, calc(100vh - 405px), 540px);
+    height: clamp(230px, calc(100svh - 405px), 540px);
+    transform: none; animation-name: figureInM;
+    translate: none !important;
+  }
+  @keyframes figureInM { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+  .hero-bgword { top: 13vh; }
+  .hero-copy, .hero-cta { position: relative; left: auto; right: auto; bottom: auto; transform: none !important; }
+  .hero-copy { margin-top: 6px; }
+  .hero-copy .eyebrow { margin-bottom: 10px; }
+  .hero-title { font-size: clamp(44px, 13.5vw, 64px); }
+  .hero-sub { margin-top: 12px; font-size: 14px; }
+  .hero-cta { margin-top: 20px; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
   .hero-cta .intro-link { display: none; }
-  .hero-caption { left: 6%; right: 6%; top: 2%; width: auto; max-width: none; text-align: center; font-size: 13px; padding: 11px 14px; border-radius: 16px; transform-origin: 50% 100%; }
+  .hero-caption {
+    left: 50%; right: auto; top: auto; bottom: 10%;
+    width: min(340px, calc(100vw - 32px)); max-width: none;
+    margin-left: calc(min(340px, calc(100vw - 32px)) / -2);
+    text-align: center; font-size: 13px; padding: 10px 14px; border-radius: 16px; transform-origin: 50% 100%;
+  }
   .hero-cta .btn { padding: 11px 18px; }
   .scroll-cue { display: none; }
 
