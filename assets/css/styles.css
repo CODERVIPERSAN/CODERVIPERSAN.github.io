@@ -278,9 +278,9 @@ button { font: inherit; color: inherit; }
 .hero-figure .hero-src { width: 2px; height: 2px; opacity: 0; pointer-events: none; }
 .hero-figure .hero-fallback {
   width: 200%; max-width: none; object-fit: fill;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 41%, transparent 49%), linear-gradient(transparent, #000 8%);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 41%, transparent 49%), linear-gradient(transparent, #000 8%, #000 99%, transparent);
   -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent, #000 8%, #000 41%, transparent 49%), linear-gradient(transparent, #000 8%);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 41%, transparent 49%), linear-gradient(transparent, #000 8%, #000 99%, transparent);
   mask-composite: intersect;
   -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
 }
