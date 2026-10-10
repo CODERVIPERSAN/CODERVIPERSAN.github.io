@@ -1,0 +1,12 @@
+# Only the website is published. Everything below stays on this machine.
+
+# source recordings / avatar clips (the site uses the processed versions in assets/)
+/*.mp4
+
+# build scripts, voice clone, Manim sources and their caches
+tools/
+__pycache__/
+
+# old files the current site no longer uses (student responses contain personal data)
+/my_image.jpg
+/feedback from the student  (Responses) - Form responses 1.csv
