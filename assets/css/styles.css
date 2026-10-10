@@ -885,8 +885,11 @@ a.contact-card:hover i { transform: translate(3px, -3px); }
   .about-grid { grid-template-columns: 1fr 1fr; }
   .lanyard-stage { grid-row: span 2; grid-column: 2; }
   .facts { grid-column: 1; padding-top: 0; }
-  .ptable-wrap { grid-template-columns: 1fr; }
-  .ptable-preview { display: none; }
+  .ptable-wrap { grid-template-columns: minmax(0, 1fr) 190px; gap: 20px; }
+  .ptable-preview { padding: 18px 14px; }
+  .pv-logo { width: 96px; height: 96px; margin-bottom: 16px; }
+  .pv-logo .glyph { width: 84px; height: 84px; font-size: 38px; border-radius: 20px; }
+  .pv-name { font-size: 18px; }
   .panel-body { grid-template-columns: 1fr; min-width: 0; }
   .pb-visual { display: none; }
 }
@@ -919,6 +922,18 @@ a.contact-card:hover i { transform: translate(3px, -3px); }
   .lanyard-stage { grid-column: 1; grid-row: auto; height: 560px; margin-top: 0; order: -1; }
   .facts { grid-column: 1; }
 
+  .ptable-wrap { grid-template-columns: 1fr; gap: 14px; }
+  .ptable-preview {
+    order: -1; top: 70px; z-index: 3; aspect-ratio: auto;
+    flex-direction: row; justify-content: flex-start; gap: 14px; text-align: left;
+    padding: 10px 16px; border-radius: 18px;
+    background: rgba(251, 249, 243, 0.88);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  }
+  .pv-logo { width: 46px; height: 46px; margin: 0; flex: none; }
+  .pv-logo .glyph { width: 42px; height: 42px; font-size: 18px; border-radius: 11px; }
+  .pv-name { font-size: 16px; }
+  .pv-meta { margin-top: 3px; }
   .ptable { grid-template-columns: repeat(5, minmax(0, 1fr)); }
   .el b { font-size: 20px; }
   .el small, .el span { font-size: 8px; }
